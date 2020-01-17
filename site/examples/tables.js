@@ -25,16 +25,18 @@ const withTables = editor => {
     const { selection } = editor
 
     if (selection && Range.isCollapsed(selection)) {
-      const [cell] = Editor.nodes(editor, {
+      const cells = Editor.nodes(editor, {
         match: n => n.type === 'table-cell',
       })
 
-      if (cell) {
-        const [, cellPath] = cell
-        const start = Editor.start(editor, cellPath)
+      for (cell of cells) {
+        if (cell) {
+          const [, cellPath] = cell
+          const start = Editor.start(editor, cellPath)
 
-        if (Point.equals(selection.anchor, start)) {
-          return
+          if (Point.equals(selection.anchor, start)) {
+            return
+          }
         }
       }
     }
@@ -46,16 +48,18 @@ const withTables = editor => {
     const { selection } = editor
 
     if (selection && Range.isCollapsed(selection)) {
-      const [cell] = Editor.nodes(editor, {
+      const cells = Editor.nodes(editor, {
         match: n => n.type === 'table-cell',
       })
 
-      if (cell) {
-        const [, cellPath] = cell
-        const end = Editor.end(editor, cellPath)
+      for (cell of cells) {
+        if (cell) {
+          const [, cellPath] = cell
+          const end = Editor.end(editor, cellPath)
 
-        if (Point.equals(selection.anchor, end)) {
-          return
+          if (Point.equals(selection.anchor, end)) {
+            return
+          }
         }
       }
     }
